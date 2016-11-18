@@ -133,7 +133,8 @@ input[type="checkbox"]{
     color:#747474;
 }
 
-#ex1Slider .slider-selection {
+#ex1Slider 
+.slider-selection {
 	background: #537bbe;
 }
 
@@ -150,4 +151,10 @@ input[type="checkbox"]{
 	width: 70%;
 }
 
+#ex1Slider .slider-handle {
+	background: #537bbe;
+}
 
+#ex2Slider .slider-handle {
+	background: #ef453b;
+}

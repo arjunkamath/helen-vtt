@@ -71,11 +71,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>0T</td>
+                        <td><span id="aStorage">0</span>T</td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td>0T</td>
+                        <td><span id="bStorage">0</span>T</td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -99,11 +99,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>0T</td>
+                        <td><span id="aCement">0</span>T</td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td>0T</td>
+                        <td><span id="bCement">0</span>T</td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -124,10 +124,10 @@
 
      var socket = io();
 
-     $('#aFly').slider({step: 5, min: 0, max: 50});
-     $('#bFly').slider({step: 5, min: 0, max: 50});
-     $('#aBottom').slider({step: 5, min: 0, max: 50});
-     $('#bBottom').slider({step: 5, min: 0, max: 50});
+     var aFlySlider = $('#aFly').slider({step: 5, min: 0, max: 50});
+     var bFlySlider = $('#bFly').slider({step: 5, min: 0, max: 50});
+     var aBottomSlider = $('#aBottom').slider({step: 5, min: 0, max: 50});
+     var bBottomSlider = $('#bBottom').slider({step: 5, min: 0, max: 50});
 
      var emitValues = function() {
         // var aFlyValueGot = aFly.getValue();
@@ -137,7 +137,6 @@
         $("#bFlySliderVal").text(bFly.getValue());
         $("#aBottomSliderVal").text(aBottom.getValue());
         $("#bBottomSliderVal").text(bBottom.getValue());
-
 
         var feedback = 
           { 
@@ -166,34 +165,45 @@
             .data('slider');
         
       socket.on('feedback', function(msg){
-        console.log('AFlyValue is: ' + msg.aFlyValue);
-        console.log('AFlyValue is: ' + msg.bFlyValue);
-        console.log('AFlyValue is: ' + msg.aBottonValue);
-        console.log('AFlyValue is: ' + msg.bBottomValue);
+        // console.log('AFlyValue is: ' + msg.aFlyValue);
+        // console.log('AFlyValue is: ' + msg.bFlyValue);
+        // console.log('AFlyValue is: ' + msg.aBottonValue);
+        // console.log('AFlyValue is: ' + msg.bBottomValue);
+
+        // console.log('flyAshStep1 is: ' + msg.flyAshStep1);
+        // console.log('flyAshStep2 is: ' + msg.flyAshStep2);
+        // console.log('flyAshStep3 is: ' + msg.flyAshStep3);
+        // console.log('flyAshStep4 is: ' + msg.flyAshStep4);
+        // console.log('bottomAshStep1 is: ' + msg.bottomAshStep1);
+        // console.log('bottomAshStep2 is: ' + msg.bottomAshStep2);
+        // console.log('bottomAshStep3 is: ' + msg.bottomAshStep3);
+        // console.log('bottomAshStep4 is: ' + msg.bottomAshStep4);
+
+        if(msg.flyAshStep1==1){
+          aFlySlider.slider('setValue', 0);
+          $("#aFlySliderVal").text('0');
+        } else if (msg.flyAshStep2==1){
+          bFlySlider.slider('setValue', 0);
+          $("#bFlySliderVal").text('0');
+        } else if (msg.flyAshStep3==1){
+          //bFlySlider.slider('setValue', 0);
+          $("#aCement").text('25');
+          $("#bCement").text('25');
+        } else if(msg.bottomAshStep1==1){
+          bBottomSlider.slider('setValue', 0);
+          $("#bBottomSliderVal").text('0');
+        } else if (msg.bottomAshStep2==1){
+          aBottomSlider.slider('setValue', 0);
+          $("#aBottomSliderVal").text('0');
+        } else if (msg.bottomAshStep3==1){
+          //bFlySlider.slider('setValue', 0);
+          $("#aStorage").text('10');
+          $("#bStorage").text('40');
+        }
       });
 
 
-      ///////////// html javascript
 
-      // mech_photo_space.style.visibility='hidden';
-      // mech_dropdown_1.style.visibility='hidden';
-      // comments.style.visibility='hidden';
-
-      // $('#mech_addwork').click(function() {
-      //   mech_photo_space.style.visibility='visible';
-      //   mech_dropdown_1.style.visibility='visible';
-      //   comments.style.visibility='visible';
-      //   document.getElementById("mech_addwork").className = "btn-addedwork";
-        
-      // });
-
-      // var photo_space = document.getElementById("mech_photo_space");
-
-      // photo_space.addEventListener("click", function() {
-      //   console.log('img clicked');
-      //   $("#mech_photo_space").attr("src","/picsforforeman.png");
-      //   mech_work_added = true;
-      // });
 
     </script>
 
