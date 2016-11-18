@@ -124,9 +124,6 @@
       </div>
     </div>
 
-
-    
-
     <div class="row top-gap">
       <div class="col-xs-10 col-xs-offset-1">
         <div class="row">
@@ -164,11 +161,13 @@
   </form>
 
    <ul id="messages"></ul>
-   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+   <script src="jquery-1.11.1.js"></script>
+   <script src="socket.io-1.2.0.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.4.1/bootstrap-slider.min.js"></script>
   
     <script>
+
+     var socket = io();
 
      $('#aFly').slider();
      $('#bFly').slider();
@@ -176,50 +175,77 @@
      $('#bBottom').slider();
 
      var emitValues = function() {
-        var aFlyValueGot = aFly.getValue();
-        console.log('aFlyValueGot: ' + aFlyValueGot);
-        var feedback = { AFlyValue : aFlyValueGot };
+        // var aFlyValueGot = aFly.getValue();
+        // console.log('aFlyValueGot: ' + aFlyValueGot);
+        var feedback = 
+          { 
+            aFlyValue : aFly.getValue(),
+            bFlyValue : bFly.getValue(),
+            aBottonValue : aBottom.getValue(),
+            bBottomValue : bBottom.getValue()
+          };
         socket.emit('feedback', feedback);
       };
 
-     var aFly = $('#aFly').slider()
+      var aFly = $('#aFly').slider()
             .on('slide', emitValues)
             .data('slider');
 
-      var socket = io();
+      var bFly = $('#bFly').slider()
+            .on('slide', emitValues)
+            .data('slider');
+
+      var aBottom = $('#aBottom').slider()
+            .on('slide', emitValues)
+            .data('slider');
+
+      var bBottom = $('#bBottom').slider()
+            .on('slide', emitValues)
+            .data('slider');
         
       socket.on('feedback', function(msg){
-        console.log('AFlyValue is: ' + msg.AFlyValue);
-        //var feedback = msg.mech_check_1 + msg.mech_dropdown;
-        //console.log('should sms be sent: ' + msg.send_sms);
-        //console.log('customer approval: ' + msg.customer_approved);
-
+        console.log('AFlyValue is: ' + msg.aFlyValue);
+        console.log('AFlyValue is: ' + msg.bFlyValue);
+        console.log('AFlyValue is: ' + msg.aBottonValue);
+        console.log('AFlyValue is: ' + msg.bBottomValue);
       });
 
 
       ///////////// html javascript
 
-      mech_photo_space.style.visibility='hidden';
-      mech_dropdown_1.style.visibility='hidden';
-      comments.style.visibility='hidden';
+      // mech_photo_space.style.visibility='hidden';
+      // mech_dropdown_1.style.visibility='hidden';
+      // comments.style.visibility='hidden';
 
-      $('#mech_addwork').click(function() {
-        mech_photo_space.style.visibility='visible';
-        mech_dropdown_1.style.visibility='visible';
-        comments.style.visibility='visible';
-        document.getElementById("mech_addwork").className = "btn-addedwork";
+      // $('#mech_addwork').click(function() {
+      //   mech_photo_space.style.visibility='visible';
+      //   mech_dropdown_1.style.visibility='visible';
+      //   comments.style.visibility='visible';
+      //   document.getElementById("mech_addwork").className = "btn-addedwork";
         
-      });
+      // });
 
-      var photo_space = document.getElementById("mech_photo_space");
+      // var photo_space = document.getElementById("mech_photo_space");
 
-      photo_space.addEventListener("click", function() {
-        console.log('img clicked');
-        $("#mech_photo_space").attr("src","/picsforforeman.png");
-        mech_work_added = true;
-      });
+      // photo_space.addEventListener("click", function() {
+      //   console.log('img clicked');
+      //   $("#mech_photo_space").attr("src","/picsforforeman.png");
+      //   mech_work_added = true;
+      // });
 
     </script>
+
+    <script>
+    var BASE = "https://api.bt.tn/2014-06/4708/counter";
+    $(function() {
+      (function update() {
+        $.get(BASE, function(data) {
+        console.log('bttn value : ' + data.counter);
+        setTimeout(update, 2000);
+            });
+      })();
+    })
+  </script>
     
   </body>
 </html>
