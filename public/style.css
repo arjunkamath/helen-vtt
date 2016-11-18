@@ -144,3 +144,10 @@ input[type="checkbox"]{
 
 .myTable th { font:22px/1.1em Arial, Helvetica, Sans-Serif;}
 .myTable td { font:20px/1.1em Arial, Helvetica, Sans-Serif; }
+
+.map {
+	border:1px solid #bababa;
+	width: 70%;
+}
+
+
