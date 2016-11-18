@@ -9,38 +9,36 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-     
-  <form class="form-horizontal">
-  <fieldset>
 
   <!-- Form Name -->
 
-    <div class="row">
-      <div class="col-xs-12 top-banner">
-      </div>
-    </div>
 
-    <div class="row top-gap-more">
+
+    <div class="row">
        <div class="container">
           <h1 class="viewer_text">HELEN VIEW</h1>
       </div>
     </div>
 
-    <div class="row form-group">
+    <div class="row form-group plants-row">
       <div class="container">
         <div class="row row-centered">
             <div class="col-xs-6 col-centered">
               <div class="item">
                 <div class="content">
                   <h2>Plant A</h2>
-                  <img src="/addphoto.png" class="mechanic-photo">
-                  
+                  <img src="/plant_a.png" class="plant_a">
+                  <br>
+                  <br>
                   <div class="well">
-                    FLY ASH <input type="text" class="span2" value="4" id="aFly" data-slider-id='ex1Slider'>
+                    <h3>Fly Ash</h3>
+                    <input type="text" class="span2" value="4" id="aFly" data-slider-id='ex1Slider'>
                   </div>
                   <div class="well">
-                    BOTTOM ASH <input type="text" class="span2" value="4" id="aBottom" data-slider-id='ex2Slider'>
+                    <h3>Bottom Ash</h3>
+                    <input type="text" class="span2" value="4" id="aBottom" data-slider-id='ex2Slider'>
                   </div>
+                  <br>
 
                 </div>
               </div>
@@ -49,16 +47,19 @@
               <div class="item">
                 <div class="content">
                   <h2>Plant B</h2>
-                  <img src="/addphoto.png" class="mechanic-photo">
-                  
+                  <img src="/plant_b.png" class="plant_b">
+                  <br>
+                  <br>
                   <div class="well">
                      FLY ASH <input type="text" class="span2" value="4" id="bFly" data-slider-id='ex1Slider'>
                   </div>
                   
                   <div class="well">
-                    BOTTOM ASH <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
+                    BTTM ASH <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
                   </div>
+                  <br>
                 </div>
+
               </div>
             </div>
         </div>
@@ -72,7 +73,7 @@
               <div class="item">
                 <div class="content">
                   <h2>Storage</h2>
-                  <img src="/addphoto.png" class="mechanic-photo">
+                  <img src="/storage.png" class="mechanic-photo">
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -98,7 +99,7 @@
               <div class="item">
                 <div class="content">
                   <h2>Cement Factory</h2>
-                  <img src="/addphoto.png" class="mechanic-photo">
+                  <img src="/cement.png" class="mechanic-photo">
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -124,46 +125,10 @@
       </div>
     </div>
 
-    <div class="row top-gap">
-      <div class="col-xs-10 col-xs-offset-1">
-        <div class="row">
-          <div class="col-xs-7">
-            <div class="form-group">
-              <select class="form-control" id="mech_dropdown_1">
-                <option>Mirror Change</option>
-                <option>Front Light Change</option>
-                <option>Pedal Change</option>
-                <option>Brake Pad Change</option>
-              </select>
-              <input id="comments" name="textinput" type="text" size="20" maxlength="20" class="form-control top-gap" placeholder="Additional Comments">
-            </div>
-          </div>
-          <div class="col-xs-4 col-xs-offset-1">
-            <div class="row">
-              <img src="/addphoto.png" id="mech_photo_space" class="mechanic-photo">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row top-gap">
-      <div class="col-xs-10 col-xs-offset-1">
-        <div class="row">
-          <div class="col-xs-4 col-xs-offset-8">
-            <button id="singlebutton" name="singlebutton" class="btn btn-submit">SUBMIT</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </fieldset>
-  </form>
-
    <ul id="messages"></ul>
    <script src="jquery-1.11.1.js"></script>
    <script src="socket.io-1.2.0.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.4.1/bootstrap-slider.min.js"></script>
+   <script src="bootstrap-slider.min.js"></script>
   
     <script>
 

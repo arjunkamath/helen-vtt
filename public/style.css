@@ -37,10 +37,15 @@ input[type="checkbox"]{
     overflow-x: hidden;
 }
 
-.mechanic-photo{
-	width: 100%;
+.plant_a
+.plant_b {
+	height: 60%;
+	margin-bottom: 50px;
 }
 
+.plants-row{
+	height: 470px;
+}
 .btn-submit{
 	color: #ffffff;
 	background-color : #1B7BC0;
@@ -137,9 +142,9 @@ input[type="checkbox"]{
 }
 
 #ex1Slider .slider-selection {
-	background: blue;
+	background: #537bbe;
 }
 
 #ex2Slider .slider-selection {
-	background: red;
+	background: #ef453b;
 }

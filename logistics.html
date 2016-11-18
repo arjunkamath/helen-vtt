@@ -8,9 +8,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-     
-  <form class="form-horizontal">
-  <fieldset>
 
   <!-- Form Name -->
 
@@ -33,8 +30,8 @@
               <div class="item">
                 <div class="content">
                   <h2>Fly Ash Trucks</h2>
-                  <h3>3/3</h3>
-                  <img src="/addphoto.png" class="mechanic-photo">
+                  <p id="noOfFlyAshTrucks">3/3</p>
+                  <img src="/truck_blue.png" class="mechanic-photo">
                 </div>
               </div>
             </div>
@@ -42,8 +39,8 @@
               <div class="item">
                 <div class="content">
                   <h2>Bottom Ash Trucks</h2>
-                  <h3>7/7</h3>
-                  <img src="/addphoto.png" class="mechanic-photo">
+                  <p id="noOfBottomAshTrucks">7/7</p>
+                  <img src="/truck_red.png" class="mechanic-photo">
                 </div>
               </div>
             </div>
@@ -56,64 +53,106 @@
          <div class="item">
           <div class="content">
             <h2>Map</h2>
-            <img src="/addphoto.png" class="mechanic-photo">
+            <img src="/map_0.png" class="mechanic-photo">
           </div>
         </div>
       </div>
     </div>
 
-    <div class="row top-gap">
-      <div class="col-xs-10 col-xs-offset-1">
-        <div class="row">
-          <div class="col-xs-4 col-xs-offset-8">
-            <button id="singlebutton" name="singlebutton" class="btn btn-submit">SUBMIT</button>
-          </div>
+    <br>
+
+    <div class="row row-centered form-group">
+      <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Fly Ash Route</h2>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Source</th>
+                        <th>Quantity</th>
+                        <th>Checkbox</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20T</td>
+                        <td>Plant A</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                      <tr>
+                        <td>40T</td>
+                        <td>Plant B</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Bottom Ash Route</h2>
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Source</th>
+                        <th>Quantity</th>
+                        <th>Checkbox</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20T</td>
+                        <td>Plant A</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                      <tr>
+                        <td>40T</td>
+                        <td>Plant B</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
 
-  </fieldset>
-  </form>
 
    <ul id="messages"></ul>
   
     <script src="jquery-1.11.1.js"></script>
     <script src="socket.io-1.2.0.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="bootstrap.min.js"></script>
     <script>
-
-      var mech_work_added = false;
     
       var socket = io();
-    
-      $('form').submit(function(){
-
-        var check_1_checked = document.getElementById("inlineCheckbox1").checked;
-        //var check_2_checked = document.getElementById("inlineCheckbox2").checked;
-        var check_3_checked = document.getElementById("inlineCheckbox3").checked;
-        var check_4_checked = document.getElementById("inlineCheckbox4").checked;
         
-        var feedback = { 
-          mech_check_1: check_1_checked, 
-          //mech_check_2: check_2_checked, 
-          mech_check_3: check_3_checked, 
-          mech_check_4: check_4_checked, 
-          mech_dropdown: $('#mech_dropdown_1').val(),
-          mech_comment: $('#comments').val(),
-          work_added: mech_work_added
-        };
-    
-        socket.emit('feedback', feedback);
-        return false;
-      });
-    
       socket.on('feedback', function(msg){
-        console.log('aFlyValue is: ' + msg.aFlyValue);
-        console.log('bFlyValue is: ' + msg.bFlyValue);
-        console.log('aBottonValue is: ' + msg.aBottonValue);
-        console.log('bBottomValue is: ' + msg.bBottomValue);
+        // console.log('aFlyValue is: ' + msg.aFlyValue);
+        // console.log('bFlyValue is: ' + msg.bFlyValue);
+        // console.log('aBottonValue is: ' + msg.aBottonValue);
+        // console.log('bBottomValue is: ' + msg.bBottomValue);
+
+        if((msg.aFlyValue + msg.bFlyValue) >= 10){
+          console.log('enough fly ash');
+          sendFlyAshTruck();
+        }
+
+        if((msg.aBottonValue + msg.bBottomValue) >= 10){
+          console.log('enough bottom ash');
+        }
       });
 
+      var sendFlyAshTruck = function(){
+        $('#noOfFlyAshTrucks').html('2/3');
+      }
 
       ///////////// html javascript
 
