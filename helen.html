@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,17 +10,13 @@
   </head>
   <body>
 
-  <!-- Form Name -->
-
-
-
     <div class="row">
        <div class="container">
           <h1 class="viewer_text">HELEN VIEW</h1>
       </div>
     </div>
 
-    <div class="row form-group plants-row">
+    <div class="row form-group">
       <div class="container">
         <div class="row row-centered">
             <div class="col-xs-6 col-centered">
@@ -28,18 +24,11 @@
                 <div class="content">
                   <h2>Plant A</h2>
                   <img src="/plant_a.png" class="plant_a">
-                  <br>
-                  <br>
-                  <div class="well">
-                    <h3>Fly Ash</h3>
+                    <h3>Fly Ash (<span id="aFlySliderVal">3</span>T) </h3>
                     <input type="text" class="span2" value="4" id="aFly" data-slider-id='ex1Slider'>
-                  </div>
-                  <div class="well">
-                    <h3>Bottom Ash</h3>
+                    <h3>Bottom Ash (<span id="aBottomSliderVal">3</span>T) </h3>
                     <input type="text" class="span2" value="4" id="aBottom" data-slider-id='ex2Slider'>
-                  </div>
                   <br>
-
                 </div>
               </div>
             </div>
@@ -48,15 +37,12 @@
                 <div class="content">
                   <h2>Plant B</h2>
                   <img src="/plant_b.png" class="plant_b">
-                  <br>
-                  <br>
-                  <div class="well">
-                     FLY ASH <input type="text" class="span2" value="4" id="bFly" data-slider-id='ex1Slider'>
-                  </div>
-                  
-                  <div class="well">
-                    BTTM ASH <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
-                  </div>
+                    <h3>Fly Ash (<span id="bFlySliderVal">3</span>T) </h3>
+                    <input type="text" class="span2" value="4" id="bFly" data-slider-id='ex1Slider'>
+                 
+                    <h3>Bottom Ash (<span id="bBottomSliderVal">3</span>T) </h3>
+                    <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
+                 
                   <br>
                 </div>
 
@@ -74,7 +60,9 @@
                 <div class="content">
                   <h2>Storage</h2>
                   <img src="/storage.png" class="mechanic-photo">
-                  <table class="table table-striped">
+                  <br>
+                  <br>
+                  <table class="table table-striped table-bordered myTable">
                     <thead>
                       <tr>
                         <th>Quantity</th>
@@ -100,7 +88,9 @@
                 <div class="content">
                   <h2>Cement Factory</h2>
                   <img src="/cement.png" class="mechanic-photo">
-                  <table class="table table-striped">
+                  <br>
+                  <br>
+                  <table class="table table-striped table-bordered myTable">
                     <thead>
                       <tr>
                         <th>Quantity</th>
@@ -142,6 +132,13 @@
      var emitValues = function() {
         // var aFlyValueGot = aFly.getValue();
         // console.log('aFlyValueGot: ' + aFlyValueGot);
+
+        $("#aFlySliderVal").text(aFly.getValue());
+        $("#bFlySliderVal").text(bFly.getValue());
+        $("#aBottomSliderVal").text(aBottom.getValue());
+        $("#bBottomSliderVal").text(bBottom.getValue());
+
+
         var feedback = 
           { 
             aFlyValue : aFly.getValue(),
