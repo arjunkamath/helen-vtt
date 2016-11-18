@@ -24,10 +24,10 @@
                 <div class="content">
                   <h2>Plant A</h2>
                   <img src="/plant_a.png" class="plant_a">
-                    <h3>Fly Ash (<span id="aFlySliderVal">3</span>T) </h3>
-                    <input type="text" class="span2" value="4" id="aFly" data-slider-id='ex1Slider'>
-                    <h3>Bottom Ash (<span id="aBottomSliderVal">3</span>T) </h3>
-                    <input type="text" class="span2" value="4" id="aBottom" data-slider-id='ex2Slider'>
+                    <h3>Fly Ash (<span id="aFlySliderVal">20</span>T) </h3>
+                    <input type="text" class="span2" id="aFly" data-slider-id='ex1Slider' data-slider-value="20">
+                    <h3>Bottom Ash (<span id="aBottomSliderVal">5</span>T) </h3>
+                    <input type="text" class="span2" id="aBottom" data-slider-id='ex2Slider' data-slider-value="5">
                   <br>
                 </div>
               </div>
@@ -37,11 +37,11 @@
                 <div class="content">
                   <h2>Plant B</h2>
                   <img src="/plant_b.png" class="plant_b">
-                    <h3>Fly Ash (<span id="bFlySliderVal">3</span>T) </h3>
-                    <input type="text" class="span2" value="4" id="bFly" data-slider-id='ex1Slider'>
+                    <h3>Fly Ash (<span id="bFlySliderVal">25</span>T) </h3>
+                    <input type="text" class="span2" id="bFly" data-slider-id='ex1Slider' data-slider-value="25">
                  
-                    <h3>Bottom Ash (<span id="bBottomSliderVal">3</span>T) </h3>
-                    <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
+                    <h3>Bottom Ash (<span id="bBottomSliderVal">40</span>T) </h3>
+                    <input type="text" class="span2" id="bBottom" data-slider-id='ex2Slider' data-slider-value="40">
                  
                   <br>
                 </div>
@@ -71,11 +71,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>20T</td>
+                        <td>0T</td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td>40T</td>
+                        <td>0T</td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -99,11 +99,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td>20T</td>
+                        <td>0T</td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td>40T</td>
+                        <td>0T</td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -124,10 +124,10 @@
 
      var socket = io();
 
-     $('#aFly').slider();
-     $('#bFly').slider();
-     $('#aBottom').slider();
-     $('#bBottom').slider();
+     $('#aFly').slider({step: 5, min: 0, max: 50});
+     $('#bFly').slider({step: 5, min: 0, max: 50});
+     $('#aBottom').slider({step: 5, min: 0, max: 50});
+     $('#bBottom').slider({step: 5, min: 0, max: 50});
 
      var emitValues = function() {
         // var aFlyValueGot = aFly.getValue();
