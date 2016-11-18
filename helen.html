@@ -202,22 +202,33 @@
         }
       });
 
-
-
-
     </script>
 
     <script>
-    var BASE = "https://api.bt.tn/2014-06/4708/counter";
+    var BASE_BLUE = "https://api.bt.tn/2014-06/4708/counter";
+    var BASE_RED = "https://api.bt.tn/2014-06/4757/counter";
     $(function() {
       (function update() {
-        $.get(BASE, function(data) {
-        console.log('bttn value : ' + data.counter);
-        setTimeout(update, 2000);
-            });
-      })();
+        $.get(BASE_BLUE, function(data) {
+          console.log('Blue bttn value : ' + data.counter);
+          if( data.counter % 2 == 0){
+            aFlySlider.slider('setValue', 25);  
+            emitValues();
+          }
+          setTimeout(update, 2000); 
+          });
+
+        $.get(BASE_RED, function(data) {
+          console.log('Red bttn value : ' + data.counter);
+          if( data.counter % 2 == 0){
+            aBottomSlider.slider('setValue', 10);
+            $("#aBottomSliderVal").text('10');
+            emitValues();
+          }
+          setTimeout(update, 20000); 
+          });
+      }) ();
     })
   </script>
-    
   </body>
 </html>
