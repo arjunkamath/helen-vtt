@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer Info</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    
+  <form class="form-horizontal">
+    <fieldset>
+
+      <!-- Form Name -->
+
+    <div class="row">
+      <div class="col-xs-12 top-banner">
+         <img src="/vehologo.png" class="top-photo">
+         <img src="/merclogo.png" class="top-photo-merc">
+      </div>
+    </div>
+
+      <div class="row top-gap-more">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h3 class="viewer_text">Hi,</h3>
+          <h3 class="viewer_text">We are working on your Mercedes C-class</h3>
+        </div>
+      </div>
+
+
+       <div class="row top-gap">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="row">
+            <div class="col-xs-3">
+              <svg height="80" width="100%">
+                <circle id="cust_circ_1" cx="25" cy="50" r="18" stroke="#1B468D" stroke-width="3" fill="#1B468D" />
+              </svg>
+              <p class="viewer_text text-center">Waiting for mechanic</p>
+            </div>
+            <div class="col-xs-3">
+              <svg height="80" width="100%">
+                <circle id="cust_circ_2" cx="25" cy="50" r="18" stroke="#1B468D" stroke-width="3" fill="#ffffff" />
+              </svg>
+              <p class="viewer_text text-center">Being repaired</p>
+            </div>
+            <div class="col-xs-3">
+              <svg height="80" width="100%">
+                <circle id="cust_circ_3" cx="25" cy="50" r="18" stroke="#1B468D" stroke-width="3" fill="#ffffff" />
+              </svg>
+              <p class="viewer_text text-center">Being washed</p>
+            </div>
+            <div class="col-xs-3">
+              <svg height="80" width="100%">
+                <circle id="cust_circ_4" cx="25" cy="50" r="18" stroke="#1B468D" stroke-width="3" fill="#ffffff" />
+              </svg>
+              <p class="viewer_text text-center">Washed and ready for pickup</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <div class="row top-gap">
+        <div class="col-xs-10 col-xs-offset-1">
+          <h3 class="text-center" id="customer_status_text">WAITING FOR MECHANIC</h3>
+        </div>
+      </div>
+
+      <div class="row top-gap question_row" id="questions_row">
+        <div class="col-xs-10 col-xs-offset-1 top-gap">
+          <p id="additional_question">Brake pads need to be changed. Cost 203e</p>
+          <div class="row">
+            <div class="col-xs-4">
+              <button type="button" id="customer_approved" class="btn btn-block bottom_gap btn-submit">YES</button>
+            </div>
+            
+            <div class="col-xs-4">
+              <button type="button" class="btn btn-block bottom_gap btn-submit">NO</button>
+            </div>
+
+            <div class="col-xs-4">
+              <button type="button" class="btn btn-block bottom_gap btn-submit">Call me</button>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <img id="broken_part" src="/brokenpart.png" class="mechanic-photo bottom_gap">
+              </div>
+              <div class="col-xs-6">
+                <img id="new_part" src="/newpart.png" class="mechanic-photo bottom_gap">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--       <div class="row top-gap">
+        <div class="col-xs-10 col-xs-offset-1">
+          <img id="merc_logo" src="/merc_logo.jpeg" class="mechanic-photo">
+        </div>
+      </div> -->
+
+    </fieldset>
+  </form>
+
+
+    <script>
+      var socket = io();
+
+       $('#customer_approved').click(function(){
+
+         var feedback = { 
+            customer_approved: true
+         };
+    
+        socket.emit('feedback', feedback);
+        return false;
+      });
+
+      socket.on('feedback', function(msg){
+		    console.log('feedback received ' + msg);
+
+        var mech_check_1 = msg.mech_check_1;
+        var mech_check_3 = msg.mech_check_3;
+        var mech_check_4 = msg.mech_check_4;
+        //var mech_work_added = msg.work_added;
+        var foreman_sends_sms = msg.send_sms
+        
+
+        if(mech_check_1){
+          document.getElementById("cust_circ_2").setAttribute("fill", "#1B468D");
+          document.getElementById("customer_status_text").innerHTML = "BEING REPAIRED";
+        }
+
+        if(foreman_sends_sms){
+          document.getElementById("cust_circ_2").setAttribute("fill", "#1B468D");
+          document.getElementById("customer_status_text").innerHTML = "WAITING FOR INPUT";
+          questions_row.style.visibility='visible';
+        }
+
+        if(mech_check_3){
+          document.getElementById("cust_circ_3").setAttribute("fill", "#1B468D");
+          document.getElementById("cust_circ_2").setAttribute("fill", "#1B468D");
+          document.getElementById("customer_status_text").innerHTML = "BEING WASHED";
+          questions_row.style.visibility='hidden';
+        }
+
+        if(mech_check_4){
+          document.getElementById("cust_circ_4").setAttribute("fill", "#1B468D");
+          document.getElementById("customer_status_text").innerHTML = "READY FOR PICKUP";
+        }
+
+
+
+      });
+
+        ///////////// html javascript
+
+        //CHANGE THIS!!!
+        questions_row.style.visibility='hidden';
+
+
+    </script>
+  </body>
+</html>

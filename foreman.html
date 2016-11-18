@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Foreman Form</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+     
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+
+    <div class="row">
+      <div class="col-xs-12 top-banner">
+         <img src="/vehologo.png" class="top-photo">
+         <img src="/merclogo.png" class="top-photo-merc">
+      </div>
+    </div>
+
+    <div class="row top-gap-more">
+      <div class="col-xs-10 col-xs-offset-1">
+        <h1 class="viewer_text">FOREMAN'S VIEW</h1>
+      </div>
+    </div>
+
+    <div class="row top-gap">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row form-group">
+
+          <div class="col-xs-3">
+            <div class="row">
+              <div class="col-xs-3">
+                <input type="checkbox" id="f_inlineCheckbox1">
+              </div>
+              <div class="col-xs-8 col-xs-offset-1">
+                 <h4 class="checkbox_text">Car brought to Veho station</h4>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-3">
+            <div class="row">
+              <div class="col-xs-3">
+                <button id="foreman_addwork" class="btn btn-addwork"></button>
+              </div>
+              <div class="col-xs-8 col-xs-offset-1">
+                 <h4 class="button_text">Report Extra Repair Needs</h4>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-xs-3">
+            <div class="row">
+              <div class="col-xs-3">
+                <input type="checkbox" id="f_inlineCheckbox3" value="option3">
+              </div>
+              <div class="col-xs-8 col-xs-offset-1">
+                 <h4 class="checkbox_text">Job finished</h4>
+              </div>
+            </div>
+          </div>
+
+           <div class="col-xs-3">
+            <div class="row">
+              <div class="col-xs-3">
+                <input type="checkbox" id="f_inlineCheckbox4" value="option4">
+              </div>
+              <div class="col-xs-8 col-xs-offset-1">
+                 <h4 class="checkbox_text">Car washed and ready</h4>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="row top-gap" id="foreman_optional">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4">
+            <p>Brake pads need to be changed</p>
+            <p>Part available for 90e</p>
+          </div>
+          <div class="col-xs-4">
+            <p>Add work price</p>
+            <input id="foreman_add" name="textinput" type="text" class="form-control input-xs top-gap" placeholder="0 euro">
+          </div>
+          <div class="col-xs-4">
+            <div class="row">
+              <img src="/picsforforeman.png" id="foreman_photo_space" class="mechanic-photo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row top-gap">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-8">
+            <button id="singlebutton" name="singlebutton" class="btn btn-submit"> SEND SMS</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+  </form>
+
+   <ul id="messages"></ul>
+  
+    <script>
+      var socket = io();
+    
+      $('form').submit(function(){
+
+        // var check_1_checked = document.getElementById("inlineCheckbox1").checked;
+        // var check_2_checked = document.getElementById("inlineCheckbox2").checked;
+        // var check_3_checked = document.getElementById("inlineCheckbox3").checked;
+        // var check_4_checked = document.getElementById("inlineCheckbox4").checked;
+        
+         var feedback = { 
+            send_sms: true
+         };
+    
+        socket.emit('feedback', feedback);
+        return false;
+      });
+    
+      socket.on('feedback', function(msg){
+        var mech_check_1 = msg.mech_check_1;
+        var mech_check_3 = msg.mech_check_3;
+        var mech_check_4 = msg.mech_check_4;
+        var mech_work_added = msg.work_added;
+        var customer_accepted = msg.customer_approved;
+
+        console.log('work added by mechanic: ' + mech_work_added);
+
+         if(mech_work_added){
+          foreman_photo_space.style.visibility='visible';
+          foreman_optional.style.visibility='visible';
+          document.getElementById("foreman_addwork").className = "btn-addedwork";
+        }
+
+        if(mech_check_1){
+          document.getElementById("f_inlineCheckbox1").checked = true;
+        }
+
+        if(mech_check_3){
+          document.getElementById("f_inlineCheckbox3").checked = true;
+          document.getElementById("foreman_addwork").className = "btn-continue"; 
+        }
+
+        if(mech_check_4){
+          document.getElementById("f_inlineCheckbox4").checked = true;
+        }
+
+       
+
+        if(customer_accepted){
+          document.getElementById("foreman_addwork").className = "btn-continue"; 
+        }
+    
+        //$('#messages').append($('<li>').text(feedback));
+      });
+
+
+      ///////////// html javascript
+
+      foreman_photo_space.style.visibility='hidden';
+      foreman_optional.style.visibility='hidden';
+     
+
+
+    </script>
+  </body>
+</html>

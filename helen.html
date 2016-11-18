@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HELEN VIEW</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link href="bootstrap-slider.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+     
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+
+    <div class="row">
+      <div class="col-xs-12 top-banner">
+      </div>
+    </div>
+
+    <div class="row top-gap-more">
+       <div class="container">
+          <h1 class="viewer_text">HELEN VIEW</h1>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Plant A</h2>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                  
+                  <div class="well">
+                    FLY ASH <input type="text" class="span2" value="4" id="aFly" data-slider-id='ex1Slider'>
+                  </div>
+                  <div class="well">
+                    BOTTOM ASH <input type="text" class="span2" value="4" id="aBottom" data-slider-id='ex2Slider'>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Plant B</h2>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                  
+                  <div class="well">
+                     FLY ASH <input type="text" class="span2" value="4" id="bFly" data-slider-id='ex1Slider'>
+                  </div>
+                  
+                  <div class="well">
+                    BOTTOM ASH <input type="text" class="span2" value="4" id="bBottom" data-slider-id='ex2Slider'>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+   <div class="row form-group">
+      <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Storage</h2>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Quantity</th>
+                        <th>Source</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20T</td>
+                        <td>Plant A</td>
+                      </tr>
+                      <tr>
+                        <td>40T</td>
+                        <td>Plant B</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Cement Factory</h2>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                  <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Quantity</th>
+                        <th>Source</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>20T</td>
+                        <td>Plant A</td>
+                      </tr>
+                      <tr>
+                        <td>40T</td>
+                        <td>Plant B</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    
+
+    <div class="row top-gap">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-7">
+            <div class="form-group">
+              <select class="form-control" id="mech_dropdown_1">
+                <option>Mirror Change</option>
+                <option>Front Light Change</option>
+                <option>Pedal Change</option>
+                <option>Brake Pad Change</option>
+              </select>
+              <input id="comments" name="textinput" type="text" size="20" maxlength="20" class="form-control top-gap" placeholder="Additional Comments">
+            </div>
+          </div>
+          <div class="col-xs-4 col-xs-offset-1">
+            <div class="row">
+              <img src="/addphoto.png" id="mech_photo_space" class="mechanic-photo">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row top-gap">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-8">
+            <button id="singlebutton" name="singlebutton" class="btn btn-submit">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+  </form>
+
+   <ul id="messages"></ul>
+   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.4.1/bootstrap-slider.min.js"></script>
+  
+    <script>
+
+     $('#aFly').slider();
+     $('#bFly').slider();
+     $('#aBottom').slider();
+     $('#bBottom').slider();
+
+     var emitValues = function() {
+        var aFlyValueGot = aFly.getValue();
+        console.log('aFlyValueGot: ' + aFlyValueGot);
+        var feedback = { AFlyValue : aFlyValueGot };
+        socket.emit('feedback', feedback);
+      };
+
+     var aFly = $('#aFly').slider()
+            .on('slide', emitValues)
+            .data('slider');
+
+      var socket = io();
+        
+      socket.on('feedback', function(msg){
+        console.log('AFlyValue is: ' + msg.AFlyValue);
+        //var feedback = msg.mech_check_1 + msg.mech_dropdown;
+        //console.log('should sms be sent: ' + msg.send_sms);
+        //console.log('customer approval: ' + msg.customer_approved);
+
+      });
+
+
+      ///////////// html javascript
+
+      mech_photo_space.style.visibility='hidden';
+      mech_dropdown_1.style.visibility='hidden';
+      comments.style.visibility='hidden';
+
+      $('#mech_addwork').click(function() {
+        mech_photo_space.style.visibility='visible';
+        mech_dropdown_1.style.visibility='visible';
+        comments.style.visibility='visible';
+        document.getElementById("mech_addwork").className = "btn-addedwork";
+        
+      });
+
+      var photo_space = document.getElementById("mech_photo_space");
+
+      photo_space.addEventListener("click", function() {
+        console.log('img clicked');
+        $("#mech_photo_space").attr("src","/picsforforeman.png");
+        mech_work_added = true;
+      });
+
+    </script>
+    
+  </body>
+</html>

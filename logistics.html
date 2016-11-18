@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LOGISTICS VIEW</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+     
+  <form class="form-horizontal">
+  <fieldset>
+
+  <!-- Form Name -->
+
+    <div class="row">
+      <div class="col-xs-12 top-banner">
+         
+      </div>
+    </div>
+
+    <div class="row top-gap-more">
+      <div class="col-xs-10 col-xs-offset-1">
+        <h1 class="viewer_text">LOGISTICS VIEW</h1>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="container">
+        <div class="row row-centered">
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Fly Ash Trucks</h2>
+                  <h3>3/3</h3>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-centered">
+              <div class="item">
+                <div class="content">
+                  <h2>Bottom Ash Trucks</h2>
+                  <h3>7/7</h3>
+                  <img src="/addphoto.png" class="mechanic-photo">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row row-centered">
+      <div class="container">
+         <div class="item">
+          <div class="content">
+            <h2>Map</h2>
+            <img src="/addphoto.png" class="mechanic-photo">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row top-gap">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-8">
+            <button id="singlebutton" name="singlebutton" class="btn btn-submit">SUBMIT</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </fieldset>
+  </form>
+
+   <ul id="messages"></ul>
+  
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+
+      var mech_work_added = false;
+    
+      var socket = io();
+    
+      $('form').submit(function(){
+
+        var check_1_checked = document.getElementById("inlineCheckbox1").checked;
+        //var check_2_checked = document.getElementById("inlineCheckbox2").checked;
+        var check_3_checked = document.getElementById("inlineCheckbox3").checked;
+        var check_4_checked = document.getElementById("inlineCheckbox4").checked;
+        
+        var feedback = { 
+          mech_check_1: check_1_checked, 
+          //mech_check_2: check_2_checked, 
+          mech_check_3: check_3_checked, 
+          mech_check_4: check_4_checked, 
+          mech_dropdown: $('#mech_dropdown_1').val(),
+          mech_comment: $('#comments').val(),
+          work_added: mech_work_added
+        };
+    
+        socket.emit('feedback', feedback);
+        return false;
+      });
+    
+      socket.on('feedback', function(msg){
+        console.log('AFlyValue is: ' + msg.AFlyValue);
+        //var feedback = msg.mech_check_1 + msg.mech_dropdown;
+        //console.log('should sms be sent: ' + msg.send_sms);
+        //console.log('customer approval: ' + msg.customer_approved);
+
+      });
+
+
+      ///////////// html javascript
+
+      // mech_photo_space.style.visibility='hidden';
+      // mech_dropdown_1.style.visibility='hidden';
+      // comments.style.visibility='hidden';
+
+      // $('#mech_addwork').click(function() {
+      //   mech_photo_space.style.visibility='visible';
+      //   mech_dropdown_1.style.visibility='visible';
+      //   comments.style.visibility='visible';
+      //   document.getElementById("mech_addwork").className = "btn-addedwork";
+        
+      // });
+
+      // var photo_space = document.getElementById("mech_photo_space");
+
+      // photo_space.addEventListener("click", function() {
+      //   console.log('img clicked');
+      //   $("#mech_photo_space").attr("src","/picsforforeman.png");
+      //   mech_work_added = true;
+      // });
+
+    </script>
+  </body>
+</html>
