@@ -138,7 +138,7 @@ app.get('/logistics', function(req, res){
 // });
 
 io.on('connection', function(socket){
-  console.log('someone connected 2');
+  //console.log('someone connected 2');
 
   socket.on('feedback', function(feedback){
     io.emit('feedback', feedback);
