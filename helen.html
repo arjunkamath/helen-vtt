@@ -24,9 +24,9 @@
                 <div class="content">
                   <h2>Plant A</h2>
                   <img src="/plant_a.png" class="plant_a">
-                    <h3>Fly Ash (<span id="aFlySliderVal">20</span>T) </h3>
+                    <h3>Fly Ash (<span id="aFlySliderVal">20T</span>) </h3>
                     <input type="text" class="span2" id="aFly" data-slider-id='ex1Slider' data-slider-value="20">
-                    <h3>Bottom Ash (<span id="aBottomSliderVal">5</span>T) </h3>
+                    <h3>Bottom Ash (<span id="aBottomSliderVal">5T</span>) </h3>
                     <input type="text" class="span2" id="aBottom" data-slider-id='ex2Slider' data-slider-value="5">
                   <br>
                 </div>
@@ -37,10 +37,10 @@
                 <div class="content">
                   <h2>Plant B</h2>
                   <img src="/plant_b.png" class="plant_b">
-                    <h3>Fly Ash (<span id="bFlySliderVal">25</span>T) </h3>
+                    <h3>Fly Ash (<span id="bFlySliderVal">25T</span>) </h3>
                     <input type="text" class="span2" id="bFly" data-slider-id='ex1Slider' data-slider-value="25">
                  
-                    <h3>Bottom Ash (<span id="bBottomSliderVal">40</span>T) </h3>
+                    <h3>Bottom Ash (<span id="bBottomSliderVal">40T</span>) </h3>
                     <input type="text" class="span2" id="bBottom" data-slider-id='ex2Slider' data-slider-value="40">
                  
                   <br>
@@ -71,11 +71,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><span id="aStorage">0</span>T</td>
+                        <td><span id="aStorage">0T</span></td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td><span id="bStorage">0</span>T</td>
+                        <td><span id="bStorage">0T</span></td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -99,11 +99,11 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><span id="aCement">0</span>T</td>
+                        <td><span id="aCement">0T</span></td>
                         <td>Plant A</td>
                       </tr>
                       <tr>
-                        <td><span id="bCement">0</span>T</td>
+                        <td><span id="bCement">0T</span></td>
                         <td>Plant B</td>
                       </tr>
                     </tbody>
@@ -181,30 +181,59 @@
 
         if(msg.flyAshStep1==1){
           aFlySlider.slider('setValue', 0);
-          $("#aFlySliderVal").text('0');
+          $("#aFlySliderVal").text('0T');
         } else if (msg.flyAshStep2==1){
           bFlySlider.slider('setValue', 0);
-          $("#bFlySliderVal").text('0');
+          $("#bFlySliderVal").text('0T');
         } else if (msg.flyAshStep3==1){
           //bFlySlider.slider('setValue', 0);
-          $("#aCement").text('25');
-          $("#bCement").text('25');
-        } else if(msg.bottomAshStep1==1){
+          $("#aCement").text('25T');
+          $("#bCement").text('25T');
+
+          $("#aCement").css("font-weight","Bold");
+          $("#aCement").css("font-size","30px");
+          $("#bCement").css("font-weight","Bold");
+          $("#bCement").css("font-size","30px");
+
+        } else if (msg.flyAshStep4==1){
+          //bFlySlider.slider('setValue', 0);
+          //$("#aCement").text('25T');
+          //$("#bCement").text('25T');
+
+          $("#aCement").css("font-weight","normal");
+          $("#aCement").css("font-size","20px");
+          $("#bCement").css("font-weight","normal");
+          $("#bCement").css("font-size","20px");
+
+        }
+        else if(msg.bottomAshStep1==1){
           bBottomSlider.slider('setValue', 0);
           $("#bBottomSliderVal").text('0');
         } else if (msg.bottomAshStep2==1){
           aBottomSlider.slider('setValue', 0);
-          $("#aBottomSliderVal").text('0');
+          $("#aBottomSliderVal").text('0T');
         } else if (msg.bottomAshStep3==1){
           //bFlySlider.slider('setValue', 0);
-          $("#aStorage").text('10');
-          $("#bStorage").text('40');
+          $("#aStorage").text('10T');
+          $("#bStorage").text('40T');
+
+          $("#aStorage").css("font-weight","Bold");
+          $("#aStorage").css("font-size","30px");
+          $("#bStorage").css("font-weight","Bold");
+          $("#bStorage").css("font-size","30px");
+
+        } else if (msg.bottomAshStep4==1){
+
+          $("#aStorage").css("font-weight","normal");
+          $("#aStorage").css("font-size","20px");
+          $("#bStorage").css("font-weight","normal");
+          $("#bStorage").css("font-size","20px");
         }
       });
 
-    </script>
+    var red_pressed = false;
+    var blue_pressed = false;
 
-    <script>
     var BASE_BLUE = "https://api.bt.tn/2014-06/4708/counter";
     var BASE_RED = "https://api.bt.tn/2014-06/4757/counter";
     $(function() {
@@ -212,8 +241,12 @@
         $.get(BASE_BLUE, function(data) {
           console.log('Blue bttn value : ' + data.counter);
           if( data.counter % 2 == 0){
-            aFlySlider.slider('setValue', 25);  
-            emitValues();
+            if(!blue_pressed){
+              aFlySlider.slider('setValue', 25);  
+              $("#aFlySliderVal").text('25T');
+              setTimeout(function(){ emitValues(); }, 3500);
+              blue_pressed = true;
+            }
           }
           setTimeout(update, 2000); 
           });
@@ -221,11 +254,14 @@
         $.get(BASE_RED, function(data) {
           console.log('Red bttn value : ' + data.counter);
           if( data.counter % 2 == 0){
-            aBottomSlider.slider('setValue', 10);
-            $("#aBottomSliderVal").text('10');
-            emitValues();
+            if (!red_pressed) {
+              aBottomSlider.slider('setValue', 10);
+              $("#aBottomSliderVal").text('10T');
+              setTimeout(function(){ emitValues(); }, 3500);
+              red_pressed = true;  
+            };
           }
-          setTimeout(update, 20000); 
+          setTimeout(update, 2000); 
           });
       }) ();
     })
