@@ -22,7 +22,7 @@
               <div class="item">
                 <div class="content">
                   <h2>Fly Ash Trucks (<span id="noOfFlyAshTrucks">3/3</span>)  </h2>
-                  <img src="/truck_blue.png" class="mechanic-photo">
+                  <img src="truck_blue.png" class="mechanic-photo">
                 </div>
               </div>
             </div>
@@ -30,7 +30,7 @@
               <div class="item">
                 <div class="content">
                   <h2>Bottom Ash Trucks  (<span id="noOfBottomAshTrucks">3/3</span>)  </h2>
-                  <img src="/truck_red.png" class="mechanic-photo">
+                  <img src="truck_red.png" class="mechanic-photo">
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="row row-centered">
-      <img src="/map_0.png" class="map" id="mapImage"> 
+      <img src="map_0.png" class="map" id="mapImage"> 
     </div>
 
     <br>
@@ -137,21 +137,21 @@
 
       $('#flyAshStep1').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_b2.png");
+          $('#mapImage').attr("src", "map_b2.png");
           setTimeout(function(){ socket.emit('feedback', {flyAshStep1 : 1}); }, 1000);
           
       });
 
       $('#flyAshStep2').click(function() {
           //console.log('flyAshStep2 checked');
-          $('#mapImage').attr("src", "/map_b3.png");
+          $('#mapImage').attr("src", "map_b3.png");
           setTimeout(function(){ socket.emit('feedback', {flyAshStep2 : 1}); }, 1000);
           //socket.emit('feedback', {flyAshStep2 : 1});
       });
 
       $('#flyAshStep3').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_b4.png");
+          $('#mapImage').attr("src", "map_b4.png");
 
           setTimeout(function(){ socket.emit('feedback', {flyAshStep3 : 1}); }, 1000);
           //socket.emit('feedback', {flyAshStep3 : 1});
@@ -159,35 +159,35 @@
 
       $('#flyAshStep4').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_b5.png");
+          $('#mapImage').attr("src", "map_b5.png");
           setTimeout(function(){ socket.emit('feedback', {flyAshStep4 : 1}); }, 1000);
           //socket.emit('feedback', {flyAshStep4 : 1});
       });
 
       $('#bottomAshStep1').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_r2.png");
+          $('#mapImage').attr("src", "map_r2.png");
           setTimeout(function(){ socket.emit('feedback', {bottomAshStep1 : 1}); }, 1000);
           //socket.emit('feedback', {bottomAshStep1 : 1});
       });
 
       $('#bottomAshStep2').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_r3.png");
+          $('#mapImage').attr("src", "map_r3.png");
           setTimeout(function(){ socket.emit('feedback', {bottomAshStep2 : 1}); }, 1000);
           //socket.emit('feedback', {bottomAshStep2 : 1});
       });
 
       $('#bottomAshStep3').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_r4.png");
+          $('#mapImage').attr("src", "map_r4.png");
           setTimeout(function(){ socket.emit('feedback', {bottomAshStep3 : 1}); }, 1000);
           //socket.emit('feedback', {bottomAshStep3 : 1});
       });
 
       $('#bottomAshStep4').click(function() {
           //console.log('flyAshStep1 checked');
-          $('#mapImage').attr("src", "/map_r5.png");
+          $('#mapImage').attr("src", "map_r5.png");
           setTimeout(function(){ socket.emit('feedback', {bottomAshStep4 : 1}); }, 1000);
           //socket.emit('feedback', {bottomAshStep4 : 1});
       });

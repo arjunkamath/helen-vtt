@@ -1,0 +1,160 @@
+input[type="checkbox"]{
+	width: 20px;
+	height: 20px;
+	border-width: 0;
+	transition: all .3s linear;
+}
+
+.btn-addwork{
+	width: 50px;
+	height: 50px;
+	background-color: #1B7BC0;
+}
+
+.btn-addedwork{
+	background-color : red;
+	width: 50px;
+	height: 50px;
+}
+
+.btn-continue{
+	background-color : blue;
+	width: 50px;
+	height: 50px;
+}
+
+.top-gap{
+	margin-top: 20px;
+}
+
+.top-gap-more{
+	margin-top: 35px;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 300px;
+    overflow-x: hidden;
+}
+
+
+.btn-submit{
+	color: #ffffff;
+	background-color : #1B7BC0;
+	width: 100%;
+	height: 50px;
+}
+
+.question_row{
+	background-color : #f0f0f0;
+}
+
+.bottom_gap{
+	margin-bottom: 20px;
+}
+
+#foreman_add{
+	width: 80px;
+}
+
+
+.top-banner{
+	background-color : #1B468D;
+}
+
+.top-photo{
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 30px;
+}
+
+.top-photo-merc{
+	float: right;
+	margin-right: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 50px;
+}
+
+.viewer_text{
+	color: #1B468D;
+}
+
+.checkbox_text{
+	color: #1B468D;
+}
+
+.button_text{
+	color: #1B7BC0;
+}
+
+#customer_status_text{
+	color: #1B468D;	
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.item {
+    width:100%;
+    height:100%;
+	border:1px solid #cecece;
+    padding:16px 8px;
+	background:#ededed;
+	background:-webkit-gradient(linear, left top, left bottom,color-stop(0%, #f4f4f4), color-stop(100%, #ededed));
+	background:-moz-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+	background:-ms-linear-gradient(top, #f4f4f4 0%, #ededed 100%);
+}
+
+/* content styles */
+.item {
+	display:table;
+}
+.content {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+.content:before {
+    
+    font-family:sans-serif;
+    #font-size:12px;
+    letter-spacing:1px;
+    color:#747474;
+}
+
+#ex1Slider 
+.slider-selection {
+	background: #537bbe;
+}
+
+#ex2Slider .slider-selection {
+	background: #ef453b;
+}
+
+
+.myTable th { font:22px/1.1em Arial, Helvetica, Sans-Serif;}
+.myTable td { font:20px/1.1em Arial, Helvetica, Sans-Serif; }
+
+.map {
+	border:1px solid #bababa;
+	width: 70%;
+}
+
+#ex1Slider .slider-handle {
+	background: #537bbe;
+}
+
+#ex2Slider .slider-handle {
+	background: #ef453b;
+}
