@@ -13,5 +13,8 @@
   "repository": {},
   "engines": {
     "node": "4.2.x"
+  },
+  "scripts": {
+    "start": "node app.js"
   }
 }
