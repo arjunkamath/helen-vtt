@@ -1,0 +1,6 @@
+{
+  "name": "helen-vtt Example",
+  "description": "Part of the Using WebSockets on Heroku Tutorial",
+  "repository": "https://github.com/heroku-examples/node-websockets",
+  "keywords": ["node", "websocket"]
+}
