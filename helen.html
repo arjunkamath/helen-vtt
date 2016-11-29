@@ -133,10 +133,10 @@
         // var aFlyValueGot = aFly.getValue();
         // console.log('aFlyValueGot: ' + aFlyValueGot);
 
-        $("#aFlySliderVal").text(aFly.getValue());
-        $("#bFlySliderVal").text(bFly.getValue());
-        $("#aBottomSliderVal").text(aBottom.getValue());
-        $("#bBottomSliderVal").text(bBottom.getValue());
+        $("#aFlySliderVal").text(aFly.getValue() + 'T');
+        $("#bFlySliderVal").text(bFly.getValue() + 'T');
+        $("#aBottomSliderVal").text(aBottom.getValue() + 'T');
+        $("#bBottomSliderVal").text(bBottom.getValue() + 'T');
 
         var feedback = 
           { 
@@ -248,7 +248,7 @@
               blue_pressed = true;
             }
           }
-          setTimeout(update, 2000); 
+          setTimeout(update, 4000); 
           });
 
         $.get(BASE_RED, function(data) {
@@ -261,7 +261,7 @@
               red_pressed = true;  
             };
           }
-          setTimeout(update, 2000); 
+          setTimeout(update, 4000); 
           });
       }) ();
     })
